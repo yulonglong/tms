@@ -14,7 +14,8 @@
 $(document).ready(function() {
     $('._50tj').append('<input type="button" value="Confirm All" id="confirmAll">')
     $('#confirmAll').click(function(){
-        confirmFriend();
+        var num = confirmFriend();
+        alert(num + " friends accepted");
     });
 });
 
