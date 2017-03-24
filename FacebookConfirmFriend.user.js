@@ -1,14 +1,22 @@
 // ==UserScript==
 // @name         FacebookConfirmFriend
 // @namespace    https://github.com/yulonglong/tms
-// @version      1
+// @version      1.1
 // @description  Allows you mass confirm friend request
 // @author       yulonglong
-// @match        http://www.facebook.com/*
+// @match        https://www.facebook.com/*
 // @grant        none
+// @require      http://code.jquery.com/jquery-latest.js
 // ==/UserScript==
 /* jshint -W097 */
 'use strict';
+
+$(document).ready(function() {
+    $('._50tj').append('<input type="button" value="Confirm All" id="confirmAll">')
+    $('#confirmAll').click(function(){
+        confirmFriend();
+    });
+});
 
 function confirmFriend() {
 	var count =0;
@@ -22,5 +30,3 @@ function confirmFriend() {
 	}
 	return count;
 }
-
-confirmFriend();
