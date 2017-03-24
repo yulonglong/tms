@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FacebookConfirmFriend
 // @namespace    https://github.com/yulonglong/tms
-// @version      1.1
+// @version      1.2
 // @description  Allows you mass confirm friend request
 // @author       yulonglong
 // @match        https://www.facebook.com/*
