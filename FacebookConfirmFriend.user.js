@@ -23,4 +23,4 @@ function confirmFriend() {
 	return count;
 }
 
-confirmFriendbh_go();
+confirmFriend();
