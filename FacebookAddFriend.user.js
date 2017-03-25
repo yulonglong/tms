@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FacebookAddFriend
 // @namespace    https://github.com/yulonglong/tms
-// @version      0.2
+// @version      1.0
 // @description  Allows you to mass add friend to people who have liked a post
 // @author       yulonglong
 // @match        https://www.facebook.com/*
@@ -42,16 +42,10 @@ function addFriendWrapper() {
 }
 
 function addButton() {
-	$('.uiList').prepend('<li><input type="button" value="Add Friend All" class="AddFriendAll"></li>');
-	$('.AddFriendAll').click(addFriendWrapper);
+	if($("#AddFriendAll").length == 0) {
+		$('div._5i_p > ul').prepend('<li><input type="button" value="Add Friend All" id="AddFriendAll"></li>');
+		$('#AddFriendAll').click(addFriendWrapper);
+	}
 }
 
-$(document).ready(function() {
-	$('._4arz').on('click', 'span', function() {
-		alert("Wait 2 seconds for the button to appear");
-		setTimeout(addButton, 2000);
-	});
-});
-
-
-
+setInterval(addButton, 2000);
