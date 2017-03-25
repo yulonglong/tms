@@ -35,25 +35,38 @@ function invite() {
 	return count;
 }
 
-function inviteWrapper(prev) {	
+function inviteWrapper(prev) {
 	see();
 	var num = invite();
 	var total = prev + num;
 	if (total <= 50) {
-		setTimeout(inviteWrapper, 1000, total);
+		if($("#ListInviteAll").length > 0) {
+			$('#ListInviteAll').append(' + ' + num);
+		}
+		setTimeout(inviteWrapper, 500, total);
 	}
 	else {
+		if($("#ListInviteAll").length > 0) {
+			$('#ListInviteAll').append(' + ' + num);
+			$('#ListInviteAll').append(' = ' + total);
+		}
 		alert(total + " invitations sent!");
 	}
 }
 
 function inviteHighWrapper() {
-	setTimeout(inviteWrapper, 1000, 0);
+	if($("#ListInviteAll").length > 0) {
+		$('#ListInviteAll').empty();
+		$('#ListInviteAll').html('<input type="button" value="Invite All" id="InviteAll">');
+		$('#InviteAll').click(inviteHighWrapper);
+		$('#ListInviteAll').append('Loading... 0');
+	}
+	setTimeout(inviteWrapper, 500, 0);
 }
 
 function addButton() {
 	if($("#InviteAll").length == 0) {
-		$('div._5i_p > ul').prepend('<li><input type="button" value="Invite All" id="InviteAll"></li>');
+		$('div._5i_p > ul').prepend('<li id="ListInviteAll"><input type="button" value="Invite All" id="InviteAll"></li>');
 		$('#InviteAll').click(inviteHighWrapper);
 	}
 }
