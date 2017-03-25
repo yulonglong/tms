@@ -44,7 +44,7 @@ function inviteWrapper() {
 function addButton() {
 	if($("#InviteAll").length == 0) {
 		$('div._5i_p > ul').prepend('<li><input type="button" value="Invite All" id="InviteAll"></li>');
-		$('#InviteAll').click(addFriendWrapper);
+		$('#InviteAll').click(inviteWrapper);
 	}
 }
 
