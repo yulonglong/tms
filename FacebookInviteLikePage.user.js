@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FacebookInviteLikePage
 // @namespace    https://github.com/yulonglong/tms
-// @version      1.0
+// @version      1.1
 // @description  Allows you to mass invite people to like your page who have liked a page post
 // @author       yulonglong
 // @match        https://www.facebook.com/*
@@ -35,16 +35,26 @@ function invite() {
 	return count;
 }
 
-function inviteWrapper() {
+function inviteWrapper(prev) {	
 	see();
 	var num = invite();
-	alert(num + " invitations sent!");
+	var total = prev + num;
+	if (total <= 50) {
+		setTimeout(inviteWrapper, 1000, total);
+	}
+	else {
+		alert(total + " invitations sent!");
+	}
+}
+
+function inviteHighWrapper() {
+	setTimeout(inviteWrapper, 1000, 0);
 }
 
 function addButton() {
 	if($("#InviteAll").length == 0) {
 		$('div._5i_p > ul').prepend('<li><input type="button" value="Invite All" id="InviteAll"></li>');
-		$('#InviteAll').click(inviteWrapper);
+		$('#InviteAll').click(inviteHighWrapper);
 	}
 }
 
