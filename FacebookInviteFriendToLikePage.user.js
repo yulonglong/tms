@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FacebookInviteFriendToLikePage
 // @namespace    https://github.com/yulonglong/tms
-// @version      0.1
+// @version      1.0
 // @description  Allows you to mass invite your friend to like your page
 // @author       yulonglong
 // @match        https://www.facebook.com/*
@@ -12,11 +12,12 @@
 'use strict';
 
 function invite() {
-	var count =0;
+	var count = 0;
 	var inputs = document.getElementsByClassName('uiButton _1sm');
 	for(var i=0; i<inputs.length;i++) {
 		inputs[i].click();
 		count++;
+		if (count >= 50) break;
 	}
 	return count;
 }
