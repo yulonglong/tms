@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FacebookInviteFriendToLikePage
 // @namespace    https://github.com/yulonglong/tms
-// @version      1.0
+// @version      1.1
 // @description  Allows you to mass invite your friend to like your page
 // @author       yulonglong
 // @match        https://www.facebook.com/*
@@ -29,7 +29,7 @@ function inviteHighWrapper() {
 
 function addButton() {
 	if($("#InviteAll").length == 0) {
-		$('div._4-i0 > div').prepend('<input type="button" value="Invite All" id="InviteAll">');
+		$('form._s > div._4-i0 > div').prepend('<input type="button" value="Invite All" id="InviteAll">');
 		$('#InviteAll').click(inviteHighWrapper);
 	}
 }
