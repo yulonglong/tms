@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FacebookInviteLikePage
 // @namespace    https://github.com/yulonglong/tms
-// @version      1.5.3
+// @version      1.5.4
 // @description  Allows you to mass invite people to like your page who have liked a page post
 // @author       yulonglong
 // @match        https://www.facebook.com/*
@@ -63,6 +63,7 @@ function inviteWrapper(prev) {
 			$('#ListInviteAll').append(' = ' + total);
 		}
 		alert(total + " invitations sent!");
+		enableButtons();
 	}
 }
 
@@ -70,9 +71,10 @@ function inviteHighWrapper() {
 	if($("#ListInviteAll").length > 0) {
 		$('#ListInviteAll').empty();
 		$('#ListInviteAll').html('<input type="button" value="Invite All" id="InviteAll">');
-		$('#InviteAll').click(inviteHighWrapper);
+		$('#InviteAll:enabled').click(inviteHighWrapper);
 		$('#ListInviteAll').append('Loading... 0');
 	}
+	disableButtons();
 	setTimeout(inviteWrapper, 500, 0);
 }
 
@@ -114,6 +116,7 @@ function invitePerpetualWrapper(prev, grandTotal) {
 			$('#ListInvitePerpetualAll').append('Grand Total : ' + grandTotal);
 		}
 		alert(grandTotal + " invitations sent!");
+		enableButtons();
 	}
 }
 
@@ -121,21 +124,43 @@ function invitePerpetualHighWrapper() {
 	if($("#ListInvitePerpetualAll").length > 0) {
 		$('#ListInvitePerpetualAll').empty();
 		$('#ListInvitePerpetualAll').html('<input type="button" value="Invite Perpetual All" id="InvitePerpetualAll">');
-		$('#InvitePerpetualAll').click(invitePerpetualHighWrapper);
+		$('#InvitePerpetualAll:enabled').click(invitePerpetualHighWrapper);
 		$('#ListInvitePerpetualAll').append('Loading... 0');
 	}
+	disableButtons();
 	setTimeout(invitePerpetualWrapper, 500, 0, 0);
 }
 
 
+
+// Disable all buttons
+function disableButtons() {
+	if($("#InviteAll").length > 0) {
+		$('#InviteAll').prop('disabled', true);
+	}
+	if($("#InvitePerpetualAll").length > 0) {
+		$('#InvitePerpetualAll').prop('disabled', true);
+	}
+}
+
+// Enable all buttons
+function enableButtons() {
+	if($("#InviteAll").length > 0) {
+		$('#InviteAll').prop('disabled', false);
+	}
+	if($("#InvitePerpetualAll").length > 0) {
+		$('#InvitePerpetualAll').prop('disabled', false);
+	}
+}
+
 function addButton() {
 	if($("#InviteAll").length == 0) {
 		$('div._5i_p > ul').prepend('<li id="ListInviteAll"><input type="button" value="Invite All" id="InviteAll"></li>');
-		$('#InviteAll').click(inviteHighWrapper);
+		$('#InviteAll:enabled').click(inviteHighWrapper);
 	}
 	if($("#InvitePerpetualAll").length == 0) {
 		$('div._5i_p > ul').prepend('<li id="ListInvitePerpetualAll"><input type="button" value="Invite Perpetual All" id="InvitePerpetualAll"></li>');
-		$('#InvitePerpetualAll').click(invitePerpetualHighWrapper);
+		$('#InvitePerpetualAll:enabled').click(invitePerpetualHighWrapper);
 	}
 }
 
